@@ -1,0 +1,46 @@
+$disabledOpacity: .4;
+$standardColor: rgb(59, 170, 36);
+
+/* Button Default */
+$btnBgColorFrom: #f3f3f3;
+$btnBgColorTo: #e9e9e9;
+$btnHoverBgColorFrom: #f8f8f8;
+$btnHoverBgColorTo: #f0f0f0;
+$btnActiveBgColorFrom: #dadada;
+$btnActiveBgColorTo: #ebebeb;
+$btnBorderColor: #999;
+$btnTextColor: #181818;
+
+/* Button Primary */
+$btnPrimaryBgColorFrom: #4eb23a;
+$btnPrimaryBgColorTo: #359921;
+$btnPrimaryHoverBgColorFrom: #57c840;
+$btnPrimaryHoverBgColorTo: #3eaf27;
+$btnPrimaryActiveBgColorFrom: #359920;
+$btnPrimaryActiveBgColorTo: #4eb23a;
+$btnPrimaryBorderColor: #2c8e00;
+$btnPrimaryTextColor: #fff;
+
+/* Button Danger */
+$btnDangerBgColorFrom: rgb(227, 33, 25);
+$btnDangerBgColorTo: rgb(201, 4, 0);
+$btnDangerHoverBgColorFrom: rgb(245, 29, 17);
+$btnDangerHoverBgColorTo: rgb(220, 0, 0);
+$btnDangerActiveBgColorFrom: rgb(177, 5, 0);
+$btnDangerActiveBgColorTo: rgb(203, 33, 27);
+$btnDangerBorderColor: #720403;
+$btnDangerTextColor: #fff;
+
+/* Text colors */
+$textNormal: #333;
+$textPrimary: #2f7c2f;
+$textSecondary: #555;
+$textThirdly: #ddd;
+$textInfo: #b3b3b3;
+$textHighlight: #b53d01;
+$textHover: $standardColor;
+$textActive: #2f7c2f;
+
+/** Border Colors */
+$borderColor: #d6d6d3;
+$componentBorderColor: #cacaca;

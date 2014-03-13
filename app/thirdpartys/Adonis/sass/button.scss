@@ -1,0 +1,194 @@
+@import "standardColors";
+@import "compass/css3";
+
+.w-btn {
+    @include background-image(linear-gradient($btnBgColorFrom, $btnBgColorTo));
+    @include border-radius(3px);
+    @include filter-gradient($btnBgColorFrom, $btnBgColorTo);
+    @include inline-block();
+    @include single-box-shadow(0, 1px, 0, false, #fff, true);
+    @include single-text-shadow(0, 1px, 0, false, #fff);
+
+    border: 1px $btnBorderColor solid;
+    color: $btnTextColor;
+    cursor: pointer;
+    height: 30px;
+    min-width: 60px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-user-select: none;
+
+    &:hover,
+    &.hover {
+        @include background-image(linear-gradient($btnHoverBgColorFrom, $btnHoverBgColorTo));
+        @include filter-gradient($btnHoverBgColorFrom, $btnHoverBgColorTo);
+
+        color: #000;
+        text-decoration: none;
+    }
+
+    &:active,
+    &.active {
+        @include background-image(linear-gradient($btnActiveBgColorFrom, $btnActiveBgColorTo));
+        @include filter-gradient($btnActiveBgColorFrom, $btnActiveBgColorTo);
+
+        color: #000;
+        text-decoration: none;
+    }
+
+    &:disabled,
+    &.disabled {
+        @include background-image(linear-gradient($btnBgColorFrom, $btnBgColorTo));
+        @include filter-gradient($btnBgColorFrom, $btnBgColorTo);
+
+        color: $btnTextColor;
+        opacity: $disabledOpacity;
+    }
+
+
+    &.w-btn-primary {
+        @include background-image(linear-gradient($btnPrimaryBgColorFrom, $btnPrimaryBgColorTo));
+        @include filter-gradient($btnPrimaryBgColorFrom, $btnPrimaryBgColorTo);
+        @include single-box-shadow(0, 1px, 0, false, #72c261, true);
+        @include single-text-shadow(0, 1px, 0, false, rgba(0, 0, 0, .2));
+
+        border-color: $btnPrimaryBorderColor;
+        color: $btnPrimaryTextColor;
+
+        &:hover,
+        &.hover {
+            @include background-image(linear-gradient($btnPrimaryHoverBgColorFrom, $btnPrimaryHoverBgColorTo));
+            @include filter-gradient($btnPrimaryHoverBgColorFrom, $btnPrimaryHoverBgColorTo);
+            @include single-box-shadow(0, 1px, 0, false, #79d367, true);
+        }
+
+        &:active,
+        &.active {
+            @include background-image(linear-gradient($btnPrimaryActiveBgColorFrom, $btnPrimaryActiveBgColorTo));
+            @include filter-gradient($btnPrimaryActiveBgColorFrom, $btnPrimaryActiveBgColorTo);
+            @include single-box-shadow(0, 1px, 0, false, #72c261, true);
+        }
+
+
+        &:disabled,
+        &.disabled {
+            @include background-image(linear-gradient($btnPrimaryBgColorFrom, $btnPrimaryBgColorTo));
+            @include filter-gradient($btnPrimaryBgColorFrom, $btnPrimaryBgColorTo);
+            @include single-box-shadow(0, 1px, 0, false, #72c261, true);
+
+            color: $btnPrimaryTextColor;
+        }
+    }
+
+    &.w-btn-danger {
+        @include background-image(linear-gradient($btnDangerBgColorFrom, $btnDangerBgColorTo));
+        @include filter-gradient($btnDangerBgColorFrom, $btnDangerBgColorTo);
+        @include single-box-shadow(0, 1px, 0, false, rgba(255, 255, 255, .2), true);
+        @include single-text-shadow(0, 1px, 0, false, rgba(0, 0, 0, .2));
+
+        border-color: $btnDangerBorderColor;
+        color: $btnDangerTextColor;
+
+        &:hover,
+        &.hover {
+            @include background-image(linear-gradient($btnDangerHoverBgColorFrom, $btnDangerHoverBgColorTo));
+            @include filter-gradient($btnDangerHoverBgColorFrom, $btnDangerHoverBgColorTo);
+        }
+
+        &:active,
+        &.active {
+            @include background-image(linear-gradient($btnDangerActiveBgColorFrom, $btnDangerActiveBgColorTo));
+            @include filter-gradient($btnDangerActiveBgColorFrom, $btnDangerActiveBgColorTo);
+        }
+
+        &:disabled,
+        &.disabled {
+            @include background-image(linear-gradient($btnDangerBgColorFrom, $btnDangerBgColorTo));
+            @include filter-gradient($btnDangerBgColorFrom, $btnDangerBgColorTo);
+        }
+    }
+
+    &.w-btn-mini {
+        height: 24px;
+        padding: 2px 10px;
+    }
+
+    &.w-btn-large {
+        font-size: 14px;
+        height: 34px;
+        padding: 7px 15px;
+    }
+
+    &.w-btn-grand {
+        font-size: 14px;
+        height: 38px;
+        padding: 9px 15px;
+        min-width: 80px;
+    }
+
+    &.w-btn-kaiju {
+        font-size: 16px;
+        height: 42px;
+        padding: 11px 15px;
+        min-width: 85px;
+    }
+
+    &.w-btn-block {
+        display: block;
+        width: 100%;
+    }
+
+    + .w-btn {
+        margin-left: 4px;
+    }
+
+    &.w-btn-link {
+        @include background-image(none);
+        @include border-radius(3px);
+        // @include filter-gradient($btnBgColorFrom, $btnBgColorTo);
+        @include inline-block();
+        @include single-box-shadow(none);
+        @include single-text-shadow(none);
+        @include transition-duration(.2s);
+        @include transition-property(color);
+
+        background: none;
+        border: none;
+        color: $textPrimary;
+        filter: none;
+        padding: 6px 11px;
+
+        &:hover {
+            color: $textHover;
+            filter: none;
+            text-decoration: underline;
+        }
+
+        &:active {
+            color: $textActive;
+        }
+
+        &:focus {
+            outline: thin dotted #333;
+            outline: 5px auto -webkit-focus-ring-color;
+            outline-offset: -2px;
+        }
+
+        &.w-btn-mini {
+            padding: 3px 11px;
+        }
+
+        &.w-btn-large {
+            padding: 8px 16px;
+        }
+
+        &.w-btn-grand {
+            padding: 10px 16px;
+        }
+
+        &.w-btn-kaiju {
+            padding: 12px 16px;
+        }
+    }
+}

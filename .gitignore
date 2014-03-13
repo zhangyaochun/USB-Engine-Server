@@ -1,0 +1,11 @@
+*.DS_store
+*.log
+
+/node_modules/
+/app/components
+/dist/
+/test/
+/.sass-cache/
+/.tmp/
+/tmp/
+/usb-guide/

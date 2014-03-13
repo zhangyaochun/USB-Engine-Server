@@ -1,0 +1,133 @@
+@import "standardColors";
+@import "compass/css3";
+
+body {
+    background-color: #fff;
+    color: $textNormal;
+    font: 12px/1.5em Arial, Helvetica, Microsoft Yahei, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    line-height: inherit;
+}
+
+a,
+.link {
+    @include transition-duration(.2s);
+    @include transition-property(color);
+
+    color: $textPrimary;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: $textHover;
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: $textActive;
+    }
+
+    &:focus {
+        outline: thin dotted #333;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+h1,
+h2,
+h3 {
+    margin: 20px 0 10px;
+}
+
+h4,
+h5,
+h6 {
+    margin: 10px 0;
+}
+
+h1,
+.h1 {
+    font-size: 38px;
+}
+
+h2,
+.h2 {
+    font-size: 32px;
+}
+
+h3,
+.h3 {
+    font-size: 24px;
+}
+
+h4,
+.h4 {
+    font-size: 18px;
+}
+
+h5,
+.h5 {
+    font-size: 14px;
+}
+
+h6,
+.h6 {
+    font-size: 12px;
+}
+
+h1 small,
+.h1 small {
+    font-size: 24px;
+}
+
+h2 small,
+.h2 small {
+    font-size: 18px;
+}
+
+h3 small,
+.h3 small,
+h4 small,
+.h4 small {
+    font-size: 14px;
+}
+
+.w-text-primary {
+    color: $textPrimary;
+}
+
+.w-text-secondary {
+    color: $textSecondary;
+}
+
+.w-text-info {
+    color: $textInfo;
+}
+
+.w-text-warning {
+    color: $textHighlight;
+}
