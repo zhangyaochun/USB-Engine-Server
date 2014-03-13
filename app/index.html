@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>USB Guide</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <style type="text/css">
+    //@@style.css
+    </style>
+
+    <!-- build:js javascripts/DD_belatedPNG_0.0.8a-min.js -->
+    <!--[if IE 6]><script src="javascripts/DD_belatedPNG_0.0.8a-min.js" type="text/javascript"></script><![endif]-->
+    <!-- endbuild -->
+
+    <!--[if IE 6]>
+    <script type="text/javascript">
+        //@@DD_belatedPNG_0.0.8a-min.js
+    </script>
+    <![endif]-->
+
+</head>
+<body onselectstart="return false;">
+    <div class="g-stage"></div>
+
+    <script type="text/template" id="connecting-start">
+        <div class="g-ctn g-connecting-start">
+            <div class="bg-container">
+                <div class="bg"></div>
+                <div class="g-progress-running"></div>
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.CONNECTION_START %></div>
+        </div>
+    </script>
+    <script type="text/template" id="downloading">
+        <div class="g-ctn g-downloading">
+            <div class="bg">
+                <div class="wording">Downloading</div>
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.DOWNLOADING_TIP %></div>
+            <div class="g-progress">
+                <div class="inner"></div>
+            </div>
+            <div class="g-tips h6 w-text-info"><%= i18n.SPEED_TIP %></div>
+        </div>
+    </script>
+    <script type="text/template" id="installing">
+        <div class="g-ctn g-installing">
+            <div class="bg">
+                <div class="wording">Installing</div>
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.INSTALLING_TIP %></div>
+        </div>
+    </script>
+    <script type="text/template" id="installing-credit">
+        <div class="g-ctn g-installing-credit">
+            <div class="bg"></div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.NOT_TRUSTED_TIP %></div>
+            <div class="g-tips">
+              <button class="w-btn w-btn-primary w-btn-large retry-credit"><%= i18n.CLICK%></button>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="publisher-not-trusted">
+        <div class="g-ctn g-publisher-not-trusted">
+            <div class="bg"></div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.CREDIT_TIP %></div>
+            <div class="g-tips">
+              <button class="w-btn w-btn-primary w-btn-large retry-trust"><%= i18n.CLICK%></button>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="install_driver_canceled">
+        <div class="g-ctn g-install-driver-canceled">
+            <div class="bg">
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.INSTALL_DRIVER_FAILED %></div>
+            <div class="g-tips">
+              <button class="w-btn w-btn-primary w-btn-large retry-install-driver"><%= i18n.RETRY_INSTALL_DRIVER%></button>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="download_driver_failed">
+        <div class="g-ctn g-download-driver-failed">
+            <div class="bg">
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.DOWNLOAD_DRIVER_FAILED %></div>
+            <div class="g-tips">
+              <button class="w-btn w-btn-primary w-btn-large retry-download-driver"><%= i18n.RETRY_DOWNLOAD_DRIVER%></button>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="connecting-error">
+        <div class="g-ctn g-error">
+            <div class="bg"></div>
+            <div class="tip w-text-secondary h5">
+              <span class="tip1"><%= i18n.RESET_USB %></span>
+              <span class="tip2"><%= i18n.RESTART_PHONE %></span>
+              <span class="tip3"><%= i18n.RESTART_PC %></span>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="conflict_vmware">
+        <div class="g-ctn g-error">
+            <div class="bg"></div>
+            <div class="tip w-text-secondary h5">
+              <span><%= i18n.RESET_USB %></span>
+              <span class="tip2"><%= i18n.RESTART_PHONE %></span>
+              <span class="tip3"><%= i18n.RESTART_PC %></span>
+            </div>
+            <a class="g-fallback link button-show-detail" target="_blank" href="https://androidfeedback.zendesk.com/entries/26187067"><%= i18n.SHOW_DETAIL_RESULT %></a>
+        </div>
+    </script>
+    <script type="text/template" id="offline-other">
+        <div class="g-ctn g-error-debug">
+            <div class="bg"></div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.USB_DEBUG_OTHER %></div>
+            <div class="g-tips button-container"><button class="button-retry-offline w-btn w-btn-primary"><%= i18n.OFFLINE_OHTER %></button></div>
+        </div>
+    </script>
+    <script type="text/template" id="offline">
+        <div class="g-ctn g-error-debug">
+            <div class="bg"></div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.USB_DEBUG %></div>
+            <div class="g-tips button-container"><button class="button-retry-offline w-btn w-btn-primary"><%= i18n.OFFLINE_RETRY %></button></div>
+            <a class="g-fallback link button-fallback-tip"><%= i18n.USB_FALLBACK_TIP %></a>
+        </div>
+    </script>
+    <script type="text/template" id="usb-guide">
+        <div class="g-ctn g-error-debug">
+            <iframe style="height: 100%; width: 100%; border: none; display:none;" id="usb-guide-iframe"></iframe>
+        </div>
+    </script>
+    <script type="text/template" id="kill-adb">
+        <div class="g-ctn g-kill-adb">
+            <div class="bg">
+            </div>
+            <div class="g-tips h5 w-text-secondary"></div>
+            <div class="g-tips">
+                <button class="w-btn w-btn-primary w-btn-large kill-adb"><%= i18n.USER_KILL_ADB_BTN %></button>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="kill-adb-error">
+        <div class="g-ctn g-kill-adb">
+            <div class="bg">
+            </div>
+            <div class="g-tips h5 w-text-secondary"></div>
+            <div class="g-tips">
+              <button class="w-btn w-btn-primary w-btn-large retry-kill-adb"><%= i18n.RETRY %></button>
+            </div>
+        </div>
+    </script>
+    <script  type="text/template" id='usb-guide-local'>
+        <div class="usb-guide-local g-ctn">
+            <div>
+                <ul class="cate-selector cf">
+                    <li class="cate selected text-primary" data-cate="guide"><%= i18n.USB_GUIDE_LOCAL_GUIDE %></li>
+                    <li class="cate text-primary" data-cate="guide-41"><%= i18n.USB_GUIDE_LOCAL_GUIDE_41 %></li>
+                    <li class="cate text-primary" data-cate="guide-42"><%= i18n.USB_GUIDE_LOCAL_GUIDE_42 %></li>
+                    <li class="cate text-primary" data-cate="guide-miui"><%= i18n.USB_GUIDE_LOCAL_GUIDE_MIUI %></li>
+                </ul>
+            </div>
+            <div class="content"><div class="img-wrap guide"></div></div>
+        </div>
+    </script>
+    <script type="text/template" id='start_cdrom_failed'>
+        <div class="g-ctn start_cdrom_failed">
+            <div class="bg">
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.CDROM %></div>
+            <a class="link button-qq link g-fallback" href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzkzODA3NzExM184NDAzMl80MDA2NTI4NzA1XzJf" target="_default"><div class="img"></div><span class="wording"><%= i18n.ASK_WANDOUJIA %></span></a>
+            <a class="link button-no-solution g-fallback"><%= i18n.NO_CDROM_TIP %></a>
+        </div>
+    </script>
+    <script type="text/template" id='uac_canceled'>
+        <div class="g-ctn uac_canceled">
+            <div class="bg">
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.UAC_CANCELED %></div>
+            <div class="g-tips">
+                <button class="w-btn w-btn-primary w-btn-large click_uac"><%= i18n.CLICK %></button>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id='reboot-computer'>
+        <div class="g-ctn g-reboot-computer">
+            <div class="bg">
+            </div>
+            <div class="g-tips h5 w-text-secondary"><%= i18n.REBOOT_COMPUTER %></div>
+        </div>
+    </script>
+
+    <script data-main="javascripts/main" src="components/requirejs/require.js"></script>
+
+    <script type="text/javascript">
+        //@@require.js
+    </script>
+    <script type="text/javascript">
+        //@@main.js
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+    "name" : "USB-Engine-Server",
+    "version" : "1.0.1",
+    "devDependencies" : {
+        "underscore": "~1.4.4",
+        "jquery" : "1.10.2",
+        "requirejs": "~2.1.6",
+        "requirejs-i18n": "~2.0.1"
+    }
+}

@@ -1,0 +1,107 @@
+@import "snappea/*.png";
+
+body.locale-en-us {
+    &,
+    button,
+    input{
+        font: 12px/1.5em 'Sergio UI', Arial, sans-serif;
+        text-rendering: auto;
+    }
+
+    .g-installing-credit {
+        .bg {
+            @include snappea-sprite(credit);
+
+            height: snappea-sprite-height(credit);
+            width: snappea-sprite-width(credit);
+        }
+    }
+
+    .g-publisher-not-trusted {
+        .bg {
+            @include snappea-sprite(not-trusted);
+
+            height: snappea-sprite-height(not-trusted);
+            width: snappea-sprite-width(not-trusted);
+        }
+    }
+
+    .g-error-debug {
+        .bg {
+            @include snappea-sprite(debug);
+
+            height: snappea-sprite-height(debug);
+            width: snappea-sprite-width(debug);
+        }
+    }
+
+    .uac_canceled {
+        .bg {
+            @include snappea-sprite(click_uac);
+
+            height: snappea-sprite-height(click_uac);
+            width: snappea-sprite-width(click_uac);
+        }
+    }
+
+    .g-download-driver-failed,
+    .g-install-driver-canceled,
+    .g-kill-adb,
+    .g-reboot-wdj {
+        .bg {
+            @include snappea-sprite(speechless);
+
+            height: snappea-sprite-height(speechless);
+            width: snappea-sprite-width(speechless);
+        }
+
+        .w-btn {
+          margin-top: 10px;
+        }
+    }
+
+    .g-downloading,
+    .g-installing {
+        .bg {
+            @include snappea-sprite(device);
+
+            height: snappea-sprite-height(device);
+            width: snappea-sprite-width(device);
+        }
+    }
+
+    .g-reboot-computer {
+        .bg {
+            @include snappea-sprite(reboot-computer);
+
+            height: snappea-sprite-height(reboot-computer);
+            width: snappea-sprite-width(reboot-computer);
+        }
+    }
+
+    .g-error {
+        .bg {
+            @include snappea-sprite(error);
+
+            height: snappea-sprite-height(error);
+            width: snappea-sprite-width(error);
+        }
+
+        .tip {
+
+            width: snappea-sprite-width(error);
+
+            .tip1 {
+                margin-left: -15px;
+            }
+
+            .tip2 {
+                margin-left: 25px;
+            }
+
+            .tip3 {
+                margin-left: 85px;
+            }
+        }
+    }
+}

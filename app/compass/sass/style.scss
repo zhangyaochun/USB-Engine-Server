@@ -1,0 +1,343 @@
+@import "../../thirdpartys/Adonis/sass/standardColors";
+@import "../../thirdpartys/Adonis/sass/reset";
+@import "../../thirdpartys/Adonis/sass/typography";
+@import "../../thirdpartys/Adonis/sass/button";
+@import "../../thirdpartys/Adonis/sass/form";
+
+@import "sprite/*.png";
+@import "compass/css3";
+
+html, body {
+    background-color: #f6f6f6;
+    overflow: hidden;
+    cursor: default;
+}
+
+/*IE hacker*/
+.w-btn {
+    *min-width : auto;
+    *border-width: 0;
+    background-color : #4CB038;
+    outline: none;
+
+    &:hover,
+    &.hover {
+        background-color : #57C83F;
+    }
+
+    &:active,
+    &.active {
+        background-color : #359921;
+    }
+
+    &.w-btn-large {
+        *padding: 7px 5px;
+    }
+}
+
+.g-stage {
+    width: 200%;
+}
+
+.g-progress {
+    background-color: #efedeb;
+    border: 1px $componentBorderColor solid;
+    height: 8px;
+    padding: 1px;
+
+    .inner {
+        background-color: $standardColor;
+        height: 8px;
+        width: 50%;
+    }
+}
+
+.g-progress-running {
+    background-image: generated-image-url('progress.png');
+    height: 12px;
+}
+
+.g-ctn {
+    float: left;
+    height: 410px;
+    overflow: hidden;
+    position: relative;
+    width: 680px;
+}
+
+.g-tips {
+    line-height: 1.5em;
+    text-align: center;
+    padding: 0 60px;
+}
+
+.g-fallback {
+    bottom: 20px;
+    position: absolute;
+    right: 20px;
+}
+
+.g-connecting-start {
+    .bg-container {
+
+        height: 209px;
+        position: relative;
+        margin: 50px auto;
+        width: 520px;
+
+        .bg {
+            background-image: generated-image-url('connecting.png');
+            height: 209px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 520px;
+        }
+
+        .g-progress-running {
+            left: 115px;
+            position: absolute;
+            top: 140px;
+            width: 115px;
+        }
+    }
+}
+
+.g-download-driver-failed,
+.g-install-driver-canceled,
+.g-kill-adb,
+.g-reboot-wdj {
+    .bg {
+        @include sprite-sprite(speechless);
+
+        height: sprite-sprite-height(speechless);
+        position: relative;
+        margin: 50px auto;
+        width: sprite-sprite-width(speechless);
+    }
+
+    .w-btn {
+      margin-top: 10px;
+    }
+}
+
+.g-downloading,
+.g-installing {
+    .bg {
+        @include sprite-sprite(device);
+
+        height: sprite-sprite-height(device);
+        overflow: hidden;
+        position: relative;
+        margin: 50px auto;
+        width: sprite-sprite-width(device);
+
+        .wording {
+            color: #fff;
+            font-size: 10px;
+            margin-top: 90px;
+            text-align: center;
+        }
+    }
+}
+
+.g-downloading {
+    .g-progress {
+        margin: 50px auto 20px;
+        width: 510px;
+    }
+}
+
+.g-installing-credit {
+    .bg {
+        @include sprite-sprite(credit);
+
+        height: sprite-sprite-height(credit);
+        margin: 50px auto 25px;
+        width: sprite-sprite-width(credit);
+    }
+
+    .g-tips {
+        margin-top: 20px;
+    }
+}
+
+.g-publisher-not-trusted {
+    .bg {
+        @include sprite-sprite(not-trusted);
+
+        height: sprite-sprite-height(not-trusted);
+        margin: 50px auto 25px;
+        width: sprite-sprite-width(not-trusted);
+    }
+
+    .g-tips {
+        margin-top: 20px;
+    }
+}
+
+.g-reboot-computer {
+    .bg {
+        @include sprite-sprite(reboot-computer);
+
+        height: sprite-sprite-height(reboot-computer);
+        margin: 50px auto 25px;
+        width: sprite-sprite-width(reboot-computer);
+    }
+
+    .g-tips {
+        margin-top: 20px;
+    }
+}
+
+.g-error {
+    .bg {
+        @include sprite-sprite(error);
+        _margin-left: 80px 62px 10px;
+
+        height: sprite-sprite-height(error);
+        margin: 80px auto 10px;
+        width: sprite-sprite-width(error);
+    }
+
+    .tip {
+
+        _margin-left: 62px;
+        _margin-right: 62px;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        width: sprite-sprite-width(error);
+
+        .tip2 {
+            margin-left: 60px;
+        }
+
+        .tip3 {
+            margin-left: 115px;
+        }
+    }
+}
+
+.start_cdrom_failed {
+    text-align: center;
+
+    .bg {
+        @include sprite-sprite(cdrom);
+
+        height: sprite-sprite-height(cdrom);
+        margin: 60px auto;
+        width: sprite-sprite-width(cdrom);
+    }
+
+    .button-qq {
+        display: none;
+
+        .img {
+            float: right;
+            @include sprite-sprite('qq');
+            height: sprite-sprite-height('qq');
+            margin-left: 2px;
+            width: sprite-sprite-width('qq');
+        }
+
+        .wording {
+            float: left;
+        }
+    }
+
+    .button-no-solution {
+        display: none;
+    }
+}
+
+.g-error-debug {
+    .bg {
+        @include sprite-sprite(debug);
+
+        height: sprite-sprite-height(debug);
+        margin: 60px auto 20px auto;
+        width: sprite-sprite-width(debug);
+    }
+
+    .button-container {
+        margin-top: 20px;
+    }
+}
+
+.adbdebug_iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.uac_canceled {
+    .bg {
+        @include sprite-sprite(click_uac);
+
+        height: sprite-sprite-height(click_uac);
+        margin: 60px auto 20px auto;
+        width: sprite-sprite-width(click_uac);
+    }
+
+    .w-btn {
+      margin-top: 10px;
+    }
+}
+
+.usb-guide-local {
+    box-sizing: border-box;
+    font-size: 14px;
+    padding: 20px 0px;
+
+    .cate-selector {
+        height: 20px;
+        list-style-type: none;
+        margin: 0px 0px 20px 0px;
+
+        .cate {
+            border: 1px transparent solid;
+            float: left;
+            min-width: 80px;
+            padding: 3px 0;
+            position: relative;
+            text-align: center;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            + .cate {
+                margin-left: 10px;
+            }
+
+            &.selected {
+                background-color: $standardColor;
+                border: 1px #629333 solid;
+                border-radius: 15px;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset, 0 1px 3px rgba(0, 0, 0, .3);
+                color: #fff;
+                text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
+            }
+        }
+    }
+
+    .content {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        -webkit-box-flex: 1;
+
+        .img-wrap {
+            background-position: center center;
+            background-repeat: no-repeat;
+
+            @each $cate in guide, guide-41, guide-42, guide-miui {
+                &.#{$cate} {
+                    @include sprite-sprite(#{$cate});
+                    height: sprite-sprite-height(#{$cate})
+                }
+            }
+        }
+    }
+}
