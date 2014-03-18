@@ -228,18 +228,13 @@ module.exports = function (grunt) {
                 },{
                     from: '//@@DD_belatedPNG_0.0.8a-min.js',
                     to: '<%= grunt.file.read(paths.dist + "/javascripts/DD_belatedPNG_0.0.8a-min.js") %>'
+                },{
+                    from: '<link rel="stylesheet" type="text/css" href="stylesheets/style.css">',
+                    to: ''
+                },{
+                    from: '<script data-main="javascripts/main" src="components/requirejs/require.js"></script>',
+                    to: ''
                 }]
-            }
-        },
-        shell: {
-            buildAdonis : {
-                options : {
-                    stdout : true
-                },
-                command : './buildAdonis.sh'
-            },
-            replace : {
-                command : './build.sh'
             }
         },
         jshint : {
@@ -380,7 +375,6 @@ module.exports = function (grunt) {
                 'usemin',
                 'replace:dist',
                 'replacemain',
-                'shell:replace',
                 'copyI18n:'+nls
             ];
 
