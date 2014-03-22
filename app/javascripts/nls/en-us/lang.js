@@ -30,7 +30,6 @@ define({
     NO_SOLUTION : 'I\'ve tried them all but still cannot connect',
     ALLOW_INSTALL : 'Please confirm installation of SnapPea on your phone in order to connect',
     CDROM : 'You need to manually install the drivers, please click Install to continue',
-    //ASK_WANDOUJIA : '始终安装不上？QQ联系豌豆公主帮您解答',
     NO_CDROM_TIP : 'I didn\'t see this notification, try something else',
     UAC_CANCELED : 'Click "OK" to allow SnapPea to install the drivers for your phone',
     NOT_TRUSTED_TIP : 'Click "Install" when you see this window to continue installing',
