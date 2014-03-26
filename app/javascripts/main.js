@@ -237,7 +237,7 @@
             if (i18n_version !== 'zh-cn') {
                 src = 'http://s3.amazonaws.com/snappea/static/conn_v3/usb-debug.html';
                 //add by zhangyaochun 3-26 for th-th
-                if(i18n_version == 'th-th'){
+                if(i18n_version === 'th-th'){
                     src = 'http://s3-ap-southeast-1.amazonaws.com/snappea-usb-th/usb-debug_th-th.html';
                 }
                 $('#usb-guide-iframe').attr('src', src + args).show();
