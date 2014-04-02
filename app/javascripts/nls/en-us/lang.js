@@ -1,6 +1,6 @@
 /*global define*/
 define({
-    PHOME: 'Phone',
+    PHONE: 'Phone',
     CONNECTION_START : '{1} is connected to your computer，connecting to SnapPea now',
     DOWNLOADING_TIP : 'Download speed depends on your internet connection, please wait',
     SPEED_TIP : '{1}% &bull; {2}/s',

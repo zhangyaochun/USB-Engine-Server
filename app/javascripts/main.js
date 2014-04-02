@@ -168,9 +168,9 @@
             if (data.screen_name !== undefined && data.screen_name !== "") {
                 $(".g-tips.h5").html(FormatString(lang.CONNECTION_START, data.screen_name));
             } else if (data.screen_name !== undefined && data.brand_name !== "") {
-                $(".g-tips.h5").html(FormatString(lang.CONNECTION_START, data.brand_name + lang.PHOME));
+                $(".g-tips.h5").html(FormatString(lang.CONNECTION_START, data.brand_name + lang.PHONE));
             } else {
-                $(".g-tips.h5").html(FormatString(lang.CONNECTION_START, lang.PHOME));
+                $(".g-tips.h5").html(FormatString(lang.CONNECTION_START, lang.PHONE));
             }
         };
 
