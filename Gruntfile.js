@@ -347,8 +347,11 @@ module.exports = function (grunt) {
 
         //copy文件：一个index.html、images的文件夹
         grunt.file.copy(pathConfig.dist+'/index.html',nlsPath+'/index.html');
-        copyFolderRecursive(pathConfig.dist+'/images',nlsPath+'/images');
-
+        
+        //5-19 为了配合安装包问题，use去掉非en-us和zh-cn的images文件
+        if (nls === 'zh-cn' || nls === 'en-us') {
+            copyFolderRecursive(pathConfig.dist+'/images',nlsPath+'/images');
+        }
     })
 
     //for i18n
