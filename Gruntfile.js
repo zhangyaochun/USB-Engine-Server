@@ -408,7 +408,13 @@ module.exports = function (grunt) {
                 nlss = removeItem(nlss, base);
             }
             
-            nlss.push(arguments[1]);
+            /*for safe build 
+             *if '' no need to put nlss and it will add length
+             */
+            if (arguments[2] !== '') {
+                nlss.push(arguments[2]);
+            }
+            
         } else if (arguments.length === 1 && nlss.length === 1) {
             //single build
             base = nls;
