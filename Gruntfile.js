@@ -400,7 +400,11 @@ module.exports = function (grunt) {
                 base = arguments[1];
             }
             //del first
-            if (nls.indexOf(arguments[1]) > -1) { 
+            /** find bug in nls.indexOf
+             * If grunt build:WDJ:zh-cn:
+             * param base is '' 
+             */
+            if (nlss.indexOf(arguments[1]) > -1) { 
                 nlss = removeItem(nlss, base);
             }
             
