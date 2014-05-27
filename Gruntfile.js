@@ -1,4 +1,5 @@
 'use strict';
+
 var fs = require('fs');
 var util = require('util');
 var rimraf = require('rimraf');
@@ -337,7 +338,7 @@ module.exports = function (grunt) {
     function copyFolder(source, dist){
 
         if(!fs.existsSync(source)){
-            grunt.fail.warn('Cannot finde path: ' + source)
+            grunt.fail.warn('Cannot find path: ' + source)
             return;
         }
 
@@ -366,18 +367,6 @@ module.exports = function (grunt) {
             
         }
 
-    };
-
-    function removeItem(source, item){
-        var len = source.length;
-
-        while(len --) {
-            if (len in source && source[len] === item) {
-                source.splice(len, 1);
-            }
-        }
-
-        return source;
     };
 
 
@@ -429,14 +418,13 @@ module.exports = function (grunt) {
     //@nls zh-cn,en-us  ...
     grunt.registerTask('build',function(nls){
 
-        console.log(arguments);
-
         //考虑多个nls
         var nlss = nls ? nls.toLowerCase().split(',') : ['zh-cn'];
         console.log(nlss);
 
 
         nlss.forEach(function(nls){
+
             var taskList = [
                 'clean:dist',
                 'copy:tmp',
@@ -457,6 +445,7 @@ module.exports = function (grunt) {
             ];
 
             grunt.task.run(taskList);
+            
         });
 
         //last copy common images
