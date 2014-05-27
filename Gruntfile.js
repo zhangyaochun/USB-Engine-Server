@@ -304,13 +304,13 @@ module.exports = function (grunt) {
     //递归复制
     function copyFolderRecursive(nls, source, dist){
 
-        if(!fs.existsSync(source)){
+        if (!fs.existsSync(source)) {
             grunt.fail.warn('Cannot finde path: ' + source)
             return;
         }
 
         //如果是目录的化
-        if(fs.statSync(source).isDirectory()){
+        if (fs.statSync(source).isDirectory()) {
             fs.readdirSync(source).forEach(function(file){
 
                 if (file.indexOf(nls) > -1) {
@@ -321,13 +321,13 @@ module.exports = function (grunt) {
                 }
 
             });
-        }else{
+        } else {
 
             //只是文件的化，直接copy
             //注意dist如果是目录，会：Unable to write "**" file (Error code: EISDIR)
-            if(fs.statSync(dist).isDirectory()){
+            if (fs.statSync(dist).isDirectory()) {
                 grunt.file.copy(source,dist+'/'+source);
-            }else{
+            } else {
                 grunt.file.copy(source,dist);
             }
             
@@ -335,15 +335,15 @@ module.exports = function (grunt) {
     };
 
     //copyFolder
-    function copyFolder(source, dist){
+    function copyFolder(source, dist) {
 
-        if(!fs.existsSync(source)){
+        if (!fs.existsSync(source)) {
             grunt.fail.warn('Cannot find path: ' + source)
             return;
         }
 
         //just focus directory
-        if(fs.statSync(source).isDirectory()){
+        if (fs.statSync(source).isDirectory()) {
             
             fs.readdirSync(source).forEach(function(file){
 
@@ -357,11 +357,11 @@ module.exports = function (grunt) {
 
             });
 
-        }else{
+        } else {
 
-            if(fs.statSync(dist).isDirectory()){
+            if (fs.statSync(dist).isDirectory()) {
                 grunt.file.copy(source,dist+'/'+source);
-            }else{
+            } else {
                 grunt.file.copy(source,dist);
             }
             
@@ -373,7 +373,7 @@ module.exports = function (grunt) {
     grunt.registerTask('copyBase', function(){
         var commonImagePath = 'usb-guide/' + 'images';
         //如果存在,删掉它
-        if(fs.existsSync('usb-guide') && fs.existsSync(commonImagePath)){
+        if (fs.existsSync('usb-guide') && fs.existsSync(commonImagePath)) {
             rimraf.sync(commonImagePath);
         }
 
@@ -391,12 +391,12 @@ module.exports = function (grunt) {
         console.log(nlsPath);
 
         //如果一级不存在，就创建
-        if(!fs.existsSync('usb-guide')){
+        if (!fs.existsSync('usb-guide')) {
             fs.mkdirSync('usb-guide');
         }
 
         //如果存在,删掉它
-        if(fs.existsSync('usb-guide') && fs.existsSync(nlsPath)){
+        if (fs.existsSync('usb-guide') && fs.existsSync(nlsPath)) {
             rimraf.sync(nlsPath);
         }
 
@@ -445,7 +445,7 @@ module.exports = function (grunt) {
             ];
 
             grunt.task.run(taskList);
-            
+
         });
 
         //last copy common images
