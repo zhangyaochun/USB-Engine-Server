@@ -34,10 +34,8 @@
     ) {
         window.i18n = lang;
 
-        //兼容en-us
-        if (i18n_version == 'en-us') {
-            $('body').addClass('locale-en-us');
-        }
+        //change set all
+        $('body').addClass('locale-' + i18n_version);
 
         var show = function (id, data) {
             if ($('div#' + id).length ) {

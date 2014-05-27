@@ -1,0 +1,130 @@
+@import "zh-cn/*.png";
+
+body.locale-zh-cn {
+
+    .start_cdrom_failed {
+
+        text-align: center;
+
+        .bg {
+            @include zh-cn-sprite(cdrom);
+
+            height: zh-cn-sprite-height(cdrom);
+            margin: 60px auto;
+            width: zh-cn-sprite-width(cdrom);
+        }
+
+        .button-qq {
+            display: none;
+
+            .img {
+                float: right;
+                @include zh-cn-sprite('qq');
+                height: zh-cn-sprite-height('qq');
+                margin-left: 2px;
+                width: zh-cn-sprite-width('qq');
+            }
+
+            .wording {
+                float: left;
+            }
+        }
+
+        .button-no-solution {
+            display: none;
+        }
+    }
+
+    .g-installing-credit {
+        .bg {
+            @include zh-cn-sprite(credit);
+
+            height: zh-cn-sprite-height(credit);
+            width: zh-cn-sprite-width(credit);
+        }
+    }
+
+    .g-publisher-not-trusted {
+        .bg {
+            @include zh-cn-sprite(not-trusted);
+
+            height: zh-cn-sprite-height(not-trusted);
+            width: zh-cn-sprite-width(not-trusted);
+        }
+    }
+
+    .g-error-debug {
+        .bg {
+            @include zh-cn-sprite(debug);
+
+            height: zh-cn-sprite-height(debug);
+            width: zh-cn-sprite-width(debug);
+        }
+    }
+
+    .uac_canceled {
+        .bg {
+            @include zh-cn-sprite(click_uac);
+
+            height: zh-cn-sprite-height(click_uac);
+            width: zh-cn-sprite-width(click_uac);
+        }
+    }
+
+    .usb-guide-local {
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 20px 0px;
+
+        .cate-selector {
+            height: 20px;
+            list-style-type: none;
+            margin: 0px 0px 20px 0px;
+
+            .cate {
+                border: 1px transparent solid;
+                float: left;
+                min-width: 80px;
+                padding: 3px 0;
+                position: relative;
+                text-align: center;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                + .cate {
+                    margin-left: 10px;
+                }
+
+                &.selected {
+                    background-color: $standardColor;
+                    border: 1px #629333 solid;
+                    border-radius: 15px;
+                    box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset, 0 1px 3px rgba(0, 0, 0, .3);
+                    color: #fff;
+                    text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
+                }
+            }
+        }
+
+        .content {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            -webkit-box-flex: 1;
+
+            .img-wrap {
+                background-position: center center;
+                background-repeat: no-repeat;
+
+                @each $cate in guide, guide-41, guide-42, guide-miui {
+                    &.#{$cate} {
+                        @include zh-cn-sprite(#{$cate});
+                        height: zh-cn-sprite-height(#{$cate})
+                    }
+                }
+            }
+        }
+    }
+
+}

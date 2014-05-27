@@ -4,7 +4,7 @@
 @import "../../thirdpartys/Adonis/sass/button";
 @import "../../thirdpartys/Adonis/sass/form";
 
-@import "sprite/*.png";
+@import "common/*.png";
 @import "compass/css3";
 
 html, body {
@@ -53,7 +53,7 @@ html, body {
 }
 
 .g-progress-running {
-    background-image: generated-image-url('progress.png');
+    background-image: url('../images/progress.png');
     height: 12px;
 }
 
@@ -86,7 +86,7 @@ html, body {
         width: 520px;
 
         .bg {
-            background-image: generated-image-url('connecting.png');
+            background-image: url('../images/connecting.png');
             height: 209px;
             left: 0;
             position: absolute;
@@ -108,12 +108,12 @@ html, body {
 .g-kill-adb,
 .g-reboot-wdj {
     .bg {
-        @include sprite-sprite(speechless);
+        @include common-sprite(speechless);
 
-        height: sprite-sprite-height(speechless);
+        height: common-sprite-height(speechless);
         position: relative;
         margin: 50px auto;
-        width: sprite-sprite-width(speechless);
+        width: common-sprite-width(speechless);
     }
 
     .w-btn {
@@ -124,13 +124,13 @@ html, body {
 .g-downloading,
 .g-installing {
     .bg {
-        @include sprite-sprite(device);
+        @include common-sprite(device);
 
-        height: sprite-sprite-height(device);
+        height: common-sprite-height(device);
         overflow: hidden;
         position: relative;
         margin: 50px auto;
-        width: sprite-sprite-width(device);
+        width: common-sprite-width(device);
 
         .wording {
             color: #fff;
@@ -150,13 +150,8 @@ html, body {
 
 .g-installing-credit {
     .bg {
-        @include sprite-sprite(credit);
-
-        height: sprite-sprite-height(credit);
         margin: 50px auto 25px;
-        width: sprite-sprite-width(credit);
     }
-
     .g-tips {
         margin-top: 20px;
     }
@@ -164,11 +159,7 @@ html, body {
 
 .g-publisher-not-trusted {
     .bg {
-        @include sprite-sprite(not-trusted);
-
-        height: sprite-sprite-height(not-trusted);
         margin: 50px auto 25px;
-        width: sprite-sprite-width(not-trusted);
     }
 
     .g-tips {
@@ -178,11 +169,11 @@ html, body {
 
 .g-reboot-computer {
     .bg {
-        @include sprite-sprite(reboot-computer);
+        @include common-sprite(reboot-computer);
 
-        height: sprite-sprite-height(reboot-computer);
+        height: common-sprite-height(reboot-computer);
         margin: 50px auto 25px;
-        width: sprite-sprite-width(reboot-computer);
+        width: common-sprite-width(reboot-computer);
     }
 
     .g-tips {
@@ -192,12 +183,12 @@ html, body {
 
 .g-error {
     .bg {
-        @include sprite-sprite(error);
+        @include common-sprite(error);
         _margin-left: 80px 62px 10px;
 
-        height: sprite-sprite-height(error);
+        height: common-sprite-height(error);
         margin: 80px auto 10px;
-        width: sprite-sprite-width(error);
+        width: common-sprite-width(error);
     }
 
     .tip {
@@ -208,7 +199,7 @@ html, body {
         margin-left: auto;
         margin-right: auto;
 
-        width: sprite-sprite-width(error);
+        width: common-sprite-width(error);
 
         .tip2 {
             margin-left: 60px;
@@ -220,45 +211,9 @@ html, body {
     }
 }
 
-.start_cdrom_failed {
-    text-align: center;
-
-    .bg {
-        @include sprite-sprite(cdrom);
-
-        height: sprite-sprite-height(cdrom);
-        margin: 60px auto;
-        width: sprite-sprite-width(cdrom);
-    }
-
-    .button-qq {
-        display: none;
-
-        .img {
-            float: right;
-            @include sprite-sprite('qq');
-            height: sprite-sprite-height('qq');
-            margin-left: 2px;
-            width: sprite-sprite-width('qq');
-        }
-
-        .wording {
-            float: left;
-        }
-    }
-
-    .button-no-solution {
-        display: none;
-    }
-}
-
 .g-error-debug {
     .bg {
-        @include sprite-sprite(debug);
-
-        height: sprite-sprite-height(debug);
         margin: 60px auto 20px auto;
-        width: sprite-sprite-width(debug);
     }
 
     .button-container {
@@ -274,70 +229,10 @@ html, body {
 
 .uac_canceled {
     .bg {
-        @include sprite-sprite(click_uac);
-
-        height: sprite-sprite-height(click_uac);
         margin: 60px auto 20px auto;
-        width: sprite-sprite-width(click_uac);
     }
 
     .w-btn {
       margin-top: 10px;
-    }
-}
-
-.usb-guide-local {
-    box-sizing: border-box;
-    font-size: 14px;
-    padding: 20px 0px;
-
-    .cate-selector {
-        height: 20px;
-        list-style-type: none;
-        margin: 0px 0px 20px 0px;
-
-        .cate {
-            border: 1px transparent solid;
-            float: left;
-            min-width: 80px;
-            padding: 3px 0;
-            position: relative;
-            text-align: center;
-
-            &:hover {
-                cursor: pointer;
-            }
-
-            + .cate {
-                margin-left: 10px;
-            }
-
-            &.selected {
-                background-color: $standardColor;
-                border: 1px #629333 solid;
-                border-radius: 15px;
-                box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset, 0 1px 3px rgba(0, 0, 0, .3);
-                color: #fff;
-                text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
-            }
-        }
-    }
-
-    .content {
-        margin-bottom: 20px;
-        margin-top: 20px;
-        -webkit-box-flex: 1;
-
-        .img-wrap {
-            background-position: center center;
-            background-repeat: no-repeat;
-
-            @each $cate in guide, guide-41, guide-42, guide-miui {
-                &.#{$cate} {
-                    @include sprite-sprite(#{$cate});
-                    height: sprite-sprite-height(#{$cate})
-                }
-            }
-        }
     }
 }
