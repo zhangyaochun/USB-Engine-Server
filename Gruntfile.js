@@ -1,4 +1,5 @@
 'use strict';
+
 var fs = require('fs');
 var util = require('util');
 var rimraf = require('rimraf');
@@ -216,6 +217,14 @@ module.exports = function (grunt) {
             }
         },
         replace: {
+            common: {
+                src: ['<%= paths.dist %>/stylesheets/style.css'],
+                overwrite: true,
+                replacements: [{
+                    from: 'images/common-',
+                    to: '../images/common-'
+                }]
+            },
             dist: {
                 src: ['<%= paths.dist %>/index.html'],
                 overwrite: true,
@@ -273,17 +282,15 @@ module.exports = function (grunt) {
         console.log('processI18n: ' + nls);
 
         //非zh-cn的往style.scss里面写nls模块scss文件
-        if(nls !== 'zh-cn'){
 
-            var main = pathConfig.tmp + '/compass/sass/style.scss';
+        var main = pathConfig.tmp + '/compass/sass/style.scss';
 
-            //var f = grunt.file.copy(main, pathConfig.tmp + '/compass/sass/main_'+nls+'.scss');
+        //var f = grunt.file.copy(main, pathConfig.tmp + '/compass/sass/main_'+nls+'.scss');
 
-            var fd = fs.openSync(main, 'a');
+        var fd = fs.openSync(main, 'a');
 
-            fs.writeSync(fd, '@import "locale-' + nls +'";');
-            fs.closeSync(fd);
-        }
+        fs.writeSync(fd, '@import "locale-' + nls +'";');
+        fs.closeSync(fd);
 
     });
 
@@ -295,73 +302,101 @@ module.exports = function (grunt) {
 
 
     //递归复制
-    function copyFolderRecursive(nls, base, source, dist){
+    function copyFolderRecursive(nls, source, dist){
 
-        if(!fs.existsSync(source)){
+        if (!fs.existsSync(source)) {
             grunt.fail.warn('Cannot finde path: ' + source)
             return;
         }
 
         //如果是目录的化
-        if(fs.statSync(source).isDirectory()){
+        if (fs.statSync(source).isDirectory()) {
             fs.readdirSync(source).forEach(function(file){
 
-                if (nls == base) {
-
+                if (file.indexOf(nls) > -1) {
                     var curPath = source + '/' + file,
                         distPath = dist + '/' + file;
-                    if(fs.statSync(curPath).isDirectory()){
-                        copyFolderRecursive(curPath,distPath);
-                    }else{
-                        grunt.file.copy(curPath,distPath);
-                    }
-
-                } else {
-                    if (file.indexOf(nls) > -1) {
-                        var curPath = source + '/' + file,
-                            distPath = dist + '/' + file;
-                        grunt.file.copy(curPath,distPath);
-                    }
+                    grunt.file.copy(curPath,distPath);
+                    fs.unlinkSync(curPath);
                 }
 
             });
-        }else{
+        } else {
 
             //只是文件的化，直接copy
             //注意dist如果是目录，会：Unable to write "**" file (Error code: EISDIR)
-            if(fs.statSync(dist).isDirectory()){
+            if (fs.statSync(dist).isDirectory()) {
                 grunt.file.copy(source,dist+'/'+source);
-            }else{
+            } else {
                 grunt.file.copy(source,dist);
             }
             
         }
     };
 
-    function removeItem(source, item){
-        var len = source.length;
+    //copyFolder
+    function copyFolder(source, dist) {
 
-        while(len --) {
-            if (len in source && source[len] === item) {
-                source.splice(len, 1);
-            }
+        if (!fs.existsSync(source)) {
+            grunt.fail.warn('Cannot find path: ' + source)
+            return;
         }
 
-        return source;
+        //just focus directory
+        if (fs.statSync(source).isDirectory()) {
+            
+            fs.readdirSync(source).forEach(function(file){
+
+                var curPath = source + '/' + file,
+                    distPath = dist + '/' + file;
+                if(fs.statSync(curPath).isDirectory()){
+                    copyFolder(curPath,distPath);
+                }else{
+                    grunt.file.copy(curPath,distPath);
+                }
+
+            });
+
+        } else {
+
+            if (fs.statSync(dist).isDirectory()) {
+                grunt.file.copy(source,dist+'/'+source);
+            } else {
+                grunt.file.copy(source,dist);
+            }
+            
+        }
+
     };
 
+
+    grunt.registerTask('copyBase', function(){
+        var commonImagePath = 'usb-guide/' + 'images';
+        //如果存在,删掉它
+        if (fs.existsSync('usb-guide') && fs.existsSync(commonImagePath)) {
+            rimraf.sync(commonImagePath);
+        }
+
+        //mkdir common images
+        fs.mkdirSync(commonImagePath);
+
+        copyFolder(pathConfig.dist+'/images', commonImagePath);
+    });
+
     //用来输出一个i18n的文件夹
-    grunt.registerTask('copyI18n',function(nls, base){
+    grunt.registerTask('copyI18n',function(nls){
+
         var nlsPath = 'usb-guide/' + nls;
+
         console.log(nlsPath);
 
         //如果一级不存在，就创建
-        if(!fs.existsSync('usb-guide')){
+        if (!fs.existsSync('usb-guide')) {
             fs.mkdirSync('usb-guide');
         }
 
         //如果存在,删掉它
-        if(fs.existsSync('usb-guide') && fs.existsSync(nlsPath)){
+        if (fs.existsSync('usb-guide') && fs.existsSync(nlsPath)) {
             rimraf.sync(nlsPath);
         }
 
@@ -375,54 +410,21 @@ module.exports = function (grunt) {
         grunt.file.copy(pathConfig.dist+'/index.html',nlsPath+'/index.html');
         
         //5-21 add base
-        if (nls == base || nls === 'zh-cn' || nls === 'en-us') {
-            copyFolderRecursive(nls, base, pathConfig.dist+'/images', nlsPath+'/images');
-        }
-    })
+        copyFolderRecursive(nls, pathConfig.dist+'/images', nlsPath+'/images');
+    
+    });
 
     //for i18n
     //@nls zh-cn,en-us  ...
     grunt.registerTask('build',function(nls){
 
-        console.log(arguments);
-
         //考虑多个nls
         var nlss = nls ? nls.toLowerCase().split(',') : ['zh-cn'];
         console.log(nlss);
 
-        var base;
-
-        if (arguments.length === 2 && typeof arguments[1] === 'string') {
-            
-            if (arguments[1] === '' && nlss.length === 1) {
-                base = arguments[0];
-            } else {
-                base = arguments[1];
-            }
-            //del first
-            /** find bug in nls.indexOf
-             * If grunt build:WDJ:zh-cn:
-             * param base is '' 
-             */
-            if (nlss.indexOf(arguments[1]) > -1) { 
-                nlss = removeItem(nlss, base);
-            }
-            
-            /*for safe build 
-             *if '' no need to put nlss and it will add length
-             */
-            if (arguments[2] !== '') {
-                nlss.push(arguments[2]);
-            }
-            
-        } else if (arguments.length === 1 && nlss.length === 1) {
-            //single build
-            base = nls;
-        }
-
-        console.log('base: ' + base);
 
         nlss.forEach(function(nls){
+
             var taskList = [
                 'clean:dist',
                 'copy:tmp',
@@ -436,12 +438,17 @@ module.exports = function (grunt) {
                 'imagemin',
                 'htmlmin',
                 'usemin',
+                'replace:common',
                 'replace:dist',
                 'replacemain',
-                'copyI18n:'+ nls + ':' + base
+                'copyI18n:'+ nls
             ];
 
             grunt.task.run(taskList);
+
         });
+
+        //last copy common images
+        grunt.task.run('copyBase');
     });
 };
