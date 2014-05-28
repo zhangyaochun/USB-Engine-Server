@@ -260,7 +260,7 @@ module.exports = function (grunt) {
     ]);
 
     //往tmp里面写一些文件
-    grunt.registerTask('processI18n',function(nls){
+    grunt.registerTask('processI18n',function (nls) {
 
         //替换语言标记
         var output = grunt.file.read(pathConfig.tmp+'/javascripts/main.js').replace('@@localname',nls);
@@ -285,21 +285,22 @@ module.exports = function (grunt) {
     });
 
 
-    grunt.registerTask('replacemain',function(){
+    grunt.registerTask('replacemain',function () {
         var output = grunt.file.read(pathConfig.dist+'/index.html').replace('//@@main.js',grunt.file.read(pathConfig.dist+'/javascripts/main.js'));
         grunt.file.write(pathConfig.dist+'/index.html',output);
     });
 
 
     //递归复制
-    function copyFolderRecursive(source,dist){
-        if(!fs.existsSync(source)){
+    function copyFolderRecursive(source,dist) {
+
+        if (!fs.existsSync(source)) {
             grunt.fail.warn('Cannot finde path: ' + source)
             return;
         }
 
         //如果是目录的化
-        if(fs.statSync(source).isDirectory()){
+        if (fs.statSync(source).isDirectory()) {
             fs.readdirSync(source).forEach(function(file){
 
                 var curPath = source + '/' + file,
@@ -311,13 +312,13 @@ module.exports = function (grunt) {
                 }
 
             });
-        }else{
+        } else {
 
             //只是文件的化，直接copy
             //注意dist如果是目录，会：Unable to write "**" file (Error code: EISDIR)
-            if(fs.statSync(dist).isDirectory()){
+            if (fs.statSync(dist).isDirectory()) {
                 grunt.file.copy(source,dist+'/'+source);
-            }else{
+            } else {
                 grunt.file.copy(source,dist);
             }
             
@@ -325,7 +326,7 @@ module.exports = function (grunt) {
     }
 
     //用来输出一个i18n的文件夹
-    grunt.registerTask('copyI18n',function(nls){
+    grunt.registerTask('copyI18n', function (nls) {
         var nlsPath = 'usb-guide/' + nls;
         console.log(nlsPath);
 
@@ -353,13 +354,13 @@ module.exports = function (grunt) {
 
     //for i18n
     //@nls zh-cn,en-us  ...
-    grunt.registerTask('build',function(nls){
+    grunt.registerTask('build', function (nls) {
 
         //考虑多个nls
         var nlss = nls ? nls.toLowerCase().split(',') : ['zh-cn'];
         console.log(nlss);
 
-        nlss.forEach(function(nls){
+        nlss.forEach(function (nls) {
             var taskList = [
                 'clean:dist',
                 'copy:tmp',
