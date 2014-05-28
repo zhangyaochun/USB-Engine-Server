@@ -270,11 +270,8 @@ module.exports = function (grunt) {
         var template = util.format('define({"%s" : true});', nls);
         grunt.file.write(pathConfig.tmp + '/javascripts/nls/lang.js', template);
 
-        console.log('processI18n: ' + nls);
-
         //非zh-cn的往style.scss里面写nls模块scss文件
         if(nls !== 'zh-cn'){
-
             var main = pathConfig.tmp + '/compass/sass/style.scss';
 
             //var f = grunt.file.copy(main, pathConfig.tmp + '/compass/sass/main_'+nls+'.scss');
@@ -295,8 +292,7 @@ module.exports = function (grunt) {
 
 
     //递归复制
-    function copyFolderRecursive(nls, base, source, dist){
-
+    function copyFolderRecursive(source,dist){
         if(!fs.existsSync(source)){
             grunt.fail.warn('Cannot finde path: ' + source)
             return;
@@ -306,22 +302,12 @@ module.exports = function (grunt) {
         if(fs.statSync(source).isDirectory()){
             fs.readdirSync(source).forEach(function(file){
 
-                if (nls == base) {
-
-                    var curPath = source + '/' + file,
-                        distPath = dist + '/' + file;
-                    if(fs.statSync(curPath).isDirectory()){
-                        copyFolderRecursive(curPath,distPath);
-                    }else{
-                        grunt.file.copy(curPath,distPath);
-                    }
-
-                } else {
-                    if (file.indexOf(nls) > -1) {
-                        var curPath = source + '/' + file,
-                            distPath = dist + '/' + file;
-                        grunt.file.copy(curPath,distPath);
-                    }
+                var curPath = source + '/' + file,
+                    distPath = dist + '/' + file;
+                if(fs.statSync(curPath).isDirectory()){
+                    copyFolderRecursive(curPath,distPath);
+                }else{
+                    grunt.file.copy(curPath,distPath);
                 }
 
             });
@@ -336,22 +322,10 @@ module.exports = function (grunt) {
             }
             
         }
-    };
-
-    function removeItem(source, item){
-        var len = source.length;
-
-        while(len --) {
-            if (len in source && source[len] === item) {
-                source.splice(len, 1);
-            }
-        }
-
-        return source;
-    };
+    }
 
     //用来输出一个i18n的文件夹
-    grunt.registerTask('copyI18n',function(nls, base){
+    grunt.registerTask('copyI18n',function(nls){
         var nlsPath = 'usb-guide/' + nls;
         console.log(nlsPath);
 
@@ -373,54 +347,17 @@ module.exports = function (grunt) {
 
         //copy文件：一个index.html、images的文件夹
         grunt.file.copy(pathConfig.dist+'/index.html',nlsPath+'/index.html');
-        
-        //5-21 add base
-        if (nls == base || nls === 'zh-cn' || nls === 'en-us') {
-            copyFolderRecursive(nls, base, pathConfig.dist+'/images', nlsPath+'/images');
-        }
-    })
+        copyFolderRecursive(pathConfig.dist+'/images',nlsPath+'/images');
+
+    });
 
     //for i18n
     //@nls zh-cn,en-us  ...
     grunt.registerTask('build',function(nls){
 
-        console.log(arguments);
-
         //考虑多个nls
         var nlss = nls ? nls.toLowerCase().split(',') : ['zh-cn'];
         console.log(nlss);
-
-        var base;
-
-        if (arguments.length === 2 && typeof arguments[1] === 'string') {
-            
-            if (arguments[1] === '' && nlss.length === 1) {
-                base = arguments[0];
-            } else {
-                base = arguments[1];
-            }
-            //del first
-            /** find bug in nls.indexOf
-             * If grunt build:WDJ:zh-cn:
-             * param base is '' 
-             */
-            if (nlss.indexOf(arguments[1]) > -1) { 
-                nlss = removeItem(nlss, base);
-            }
-            
-            /*for safe build 
-             *if '' no need to put nlss and it will add length
-             */
-            if (arguments[2] !== '') {
-                nlss.push(arguments[2]);
-            }
-            
-        } else if (arguments.length === 1 && nlss.length === 1) {
-            //single build
-            base = nls;
-        }
-
-        console.log('base: ' + base);
 
         nlss.forEach(function(nls){
             var taskList = [
@@ -438,7 +375,7 @@ module.exports = function (grunt) {
                 'usemin',
                 'replace:dist',
                 'replacemain',
-                'copyI18n:'+ nls + ':' + base
+                'copyI18n:'+nls
             ];
 
             grunt.task.run(taskList);
