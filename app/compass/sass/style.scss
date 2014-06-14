@@ -190,6 +190,20 @@ html, body {
     }
 }
 
+.g-power-off {
+    .bg {
+        @include sprite-sprite(poweron);
+
+        height: sprite-sprite-height(poweron);
+        margin: 50px auto 25px;
+        width: sprite-sprite-width(poweron);
+    }
+
+    .g-tips {
+        margin-top: 20px;
+    }
+}
+
 .g-error {
     .bg {
         @include sprite-sprite(error);

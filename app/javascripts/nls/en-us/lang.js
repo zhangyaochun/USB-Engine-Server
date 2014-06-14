@@ -35,6 +35,7 @@ define({
     UAC_CANCELED : 'Click "OK" to allow SnapPea to install the drivers for your phone',
     NOT_TRUSTED_TIP : 'Click "Install" when you see this window to continue installing',
     CLICK : 'Click',
+    POWER_OFF : 'Power off',
     REBOOT_COMPUTER : 'Restart your computer to connect'
     
 });

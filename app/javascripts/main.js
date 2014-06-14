@@ -132,8 +132,10 @@
                     startDdromFailed(obj);
                 }
                 break;
-            case STATE.ADB_SERVER_ERROR_WDJ:
             case STATE.PHONE_POWEROFF:
+                poweroffError();
+                break;
+            case STATE.ADB_SERVER_ERROR_WDJ:
             case STATE.RECOVERY:
                 connectingError(obj);
                 break;
@@ -150,6 +152,7 @@
                 driversignVerifyFailed(obj);
                 break;
             case STATE.OFFLINE:
+            case STATE.ADB_NOT_WORKING:
             case STATE.OFFLINE_OTHER:
                 offlineOther(obj);
                 break;
@@ -305,6 +308,10 @@
 
         var connectingError = function (data) {
             show('connecting-error');
+        };
+
+        var poweroffError = function (data) {
+            show('poweroff-error');
         };
 
         var killADBError = function (data) {

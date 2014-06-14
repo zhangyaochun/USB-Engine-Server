@@ -59,6 +59,7 @@
             ADB_SERVER_DONT_ACK : 37,  // adb server didn't ack, need to be killed.
             USB_DEVICE_MAY_BE_PLUGOUT : 39,
             RSA_DIALOG : 40,
+            ADB_NOT_WORKING : 41,
             // ////////////////////////////////////////////////////////////////////////
             // All internal state, bigger than 100
             // ////////////////////////////////////////////////////////////////////////

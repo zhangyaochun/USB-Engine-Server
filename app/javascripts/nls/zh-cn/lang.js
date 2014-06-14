@@ -37,6 +37,7 @@ define({
     NOT_TRUSTED_TIP : '请您在看到这个窗口时点击「安装」，继续安装手机驱动',
     CLICK : '去点一下',
     REBOOT_COMPUTER : '电脑君说它需要重启一下才能正确连接您的手机哦。',
+    POWER_OFF : '你的手机关机了，请先启动手机哦～',
 
     USB_GUIDE_LOCAL_TITLE : '请打开「USB 调试」开关',
     USB_GUIDE_LOCAL_NEED_OPEN_DEBUG : '豌豆荚需要您打开手机上的「USB 调试」开关才能连接',
